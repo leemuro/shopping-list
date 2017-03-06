@@ -1,0 +1,23 @@
+html, body, #root, #root > div {
+    height: 100%;
+    font-family: Droid Sans, Arial, sans-serif;
+}
+
+body, div, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style-type: none;
+}
+
+h1 {
+    font-size: 1em;
+}
+
+#root > div {
+    display: flex;
+    flex-direction: column;
+}

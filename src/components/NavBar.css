@@ -1,0 +1,30 @@
+.navbar {
+    height: 3em;
+    display: flex;
+    background-color: #F95759;
+    color: #fff;
+}
+
+.navbar-item {
+    flex: 1;
+    display: flex;
+}
+
+.navbar-title > span {
+    margin: auto;
+    font-weight: bold;
+}
+
+.navbar-item > button {
+    font-family: Droid Sans, Arial, sans-serif;
+    font-size: 1em;
+    background-color: transparent;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    padding: 0.75em;
+}
+
+.navbar-right > button {
+    margin-left: auto;
+}
