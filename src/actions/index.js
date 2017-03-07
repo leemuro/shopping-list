@@ -5,6 +5,7 @@ export const SHOW_LIST = 'SHOW_LIST'
 export const SHOW_ADD = 'SHOW_ADD'
 export const ADD_ITEMS = 'ADD_ITEMS'
 export const CLEAR_ITEMS = 'CLEAR_ITEMS'
+export const TOGGLE_ITEM = 'TOGGLE_ITEM'
 
 export function showList() {
     return { type: SHOW_LIST }
@@ -20,4 +21,8 @@ export function addItems(newItems) {
 
 export function clearItems() {
     return { type: CLEAR_ITEMS }
+}
+
+export function toggleItem(itemId) {
+    return { type: TOGGLE_ITEM, itemId: itemId }
 }

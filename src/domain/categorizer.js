@@ -1,8 +1,9 @@
 import getCategories from './categories'
+import filterObject from './filterObject'
 
 function itemsInCategory(items, category, categories) {
     if(category.matchers.length > 0)
-        return items.filter(i => itemMatches(i, category))
+        return filterObject(items, i => itemMatches(i, category))
     else
         return itemsInNoCategory(items, categories)
 }
@@ -19,7 +20,7 @@ function itemMatchesWord(item, word) {
 }
 
 function itemsInNoCategory(items, categories) {
-    return items.filter(i => !categories.some(c => itemMatches(i, c, categories)))
+    return filterObject(items, i => !categories.some(c => itemMatches(i, c, categories)))
 }
 
 export default function categorizeItems(items) {
@@ -30,5 +31,5 @@ export default function categorizeItems(items) {
             items: itemsInCategory(items, c, categories)
         }
     }) 
-    return result.filter(x => x.items.length > 0)
+    return result.filter(x => Object.keys(x.items).length > 0)
 }

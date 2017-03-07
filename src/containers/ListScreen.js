@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import ShoppingList from '../components/ShoppingList'
 import { connect } from 'react-redux'
-import { showAdd, clearItems } from '../actions'
+import { showAdd, clearItems, toggleItem } from '../actions'
 import categorizeItems from '../domain/categorizer'
 
 class ListScreen extends Component {
@@ -10,6 +10,7 @@ class ListScreen extends Component {
         super(props)
         this.onClearClick = this.onClearClick.bind(this)
         this.onAddClick = this.onAddClick.bind(this)
+        this.onItemClick = this.onItemClick.bind(this)
     }
     render() {
         return (
@@ -24,7 +25,10 @@ class ListScreen extends Component {
                     }
                     fixed={true}
                 />
-                <ShoppingList categorizedItems={this.props.categorizedItems} />
+                <ShoppingList 
+                    categorizedItems={this.props.categorizedItems} 
+                    onItemClick={this.onItemClick}
+                />
             </div>
         )
     }
@@ -34,6 +38,9 @@ class ListScreen extends Component {
     }
     onAddClick() {
         this.props.onAddClick()
+    }
+    onItemClick(itemId) {
+        this.props.onItemClick(itemId)
     }
 }
 
@@ -50,6 +57,9 @@ function mapDispatchToProps(dispatch) {
         },
         onAddClick: () => {
             dispatch(showAdd())
+        },
+        onItemClick: (itemId) => {
+            dispatch(toggleItem(itemId))
         }
     }
 }
