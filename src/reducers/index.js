@@ -1,14 +1,9 @@
-import { LIST_SCREEN, ADD_SCREEN, SHOW_LIST, SHOW_ADD } from '../actions'
+import Gun from 'gun'
+import { LIST_SCREEN, ADD_SCREEN, SHOW_LIST, SHOW_ADD, ADD_ITEMS } from '../actions'
 
 const initialState = { 
   screen: LIST_SCREEN,
-  items: [
-    { id: "39203", description: "Milk", completed: false },
-    { id: "39204", description: "Apples", completed: false },
-    { id: "39205", description: "Steak", completed: false },
-    { id: "39206", description: "Soup", completed: false },
-    { id: "39207", description: "Butter", completed: true }
-  ]
+  items: []
 }
 
 export default function appReducer(state = initialState, action) {
@@ -20,6 +15,14 @@ export default function appReducer(state = initialState, action) {
     case SHOW_ADD:
       return Object.assign({}, state, {
         screen: ADD_SCREEN
+      })
+    case ADD_ITEMS: 
+      let newItems = action.newItems.map(i => {
+        return { id: Gun.text.random(), description: i, completed: false }
+      })
+      return Object.assign({}, state, {
+        items: state.items.concat(newItems),
+        screen: LIST_SCREEN
       })
     default:
       return state

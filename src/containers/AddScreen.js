@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import AddItemsBox from '../components/AddItemsBox'
 import { connect } from 'react-redux'
-import { showList } from '../actions'
+import { showList, addItems } from '../actions'
 
 class AddScreen extends Component {
     constructor(props) {
@@ -38,7 +38,8 @@ class AddScreen extends Component {
         this.props.onCancelClick()
     }
     onDoneClick(event) {
-        this.props.onDoneClick(this.state.addItemsText)
+        let newItems = this.state.addItemsText.split('\n').filter(i => i.trim().length > 0)
+        this.props.onDoneClick(newItems)
     }
 }
 
@@ -47,9 +48,8 @@ function mapDispatchToProps(dispatch) {
         onCancelClick: () => {
             dispatch(showList())
         },
-        onDoneClick: (addItemsText) => {
-            console.log(addItemsText)
-            dispatch(showList())
+        onDoneClick: (newItems) => {
+            dispatch(addItems(newItems))
         }
     }
 }
