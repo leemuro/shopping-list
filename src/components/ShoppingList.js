@@ -24,7 +24,7 @@ export default function ShoppingList({ categorizedItems }) {
                 ? <ul>
                     {categorizedItems.map(c => listCategory(c))}
                   </ul>
-                : <div class="no-items">No items added</div>
+                : <p className="no-items">Click Add to add some items to the list.</p>
             }
         </div>
     )
