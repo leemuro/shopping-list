@@ -1,5 +1,5 @@
 import Gun from 'gun'
-import { LIST_SCREEN, ADD_SCREEN, SHOW_LIST, SHOW_ADD, ADD_ITEMS } from '../actions'
+import { LIST_SCREEN, ADD_SCREEN, SHOW_LIST, SHOW_ADD, ADD_ITEMS, CLEAR_ITEMS } from '../actions'
 
 const initialState = { 
   screen: LIST_SCREEN,
@@ -23,6 +23,10 @@ export default function appReducer(state = initialState, action) {
       return Object.assign({}, state, {
         items: state.items.concat(newItems),
         screen: LIST_SCREEN
+      })
+    case CLEAR_ITEMS:
+      return Object.assign({}, state, {
+        items: []
       })
     default:
       return state

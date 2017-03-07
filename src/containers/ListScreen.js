@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import ShoppingList from '../components/ShoppingList'
 import { connect } from 'react-redux'
-import { showAdd } from '../actions'
+import { showAdd, clearItems } from '../actions'
 import categorizeItems from '../domain/categorizer'
 
 class ListScreen extends Component {
@@ -29,7 +29,8 @@ class ListScreen extends Component {
         )
     }
     onClearClick() {
-        this.props.onClearClick()
+        if(confirm('Are you sure you want to clear the list?'))
+            this.props.onClearClick()
     }
     onAddClick() {
         this.props.onAddClick()
@@ -45,7 +46,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         onClearClick: () => {
-            console.log('Cleared!')
+            dispatch(clearItems())
         },
         onAddClick: () => {
             dispatch(showAdd())

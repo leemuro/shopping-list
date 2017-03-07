@@ -4,6 +4,7 @@ export const ADD_SCREEN = 'ADD_SCREEN'
 export const SHOW_LIST = 'SHOW_LIST'
 export const SHOW_ADD = 'SHOW_ADD'
 export const ADD_ITEMS = 'ADD_ITEMS'
+export const CLEAR_ITEMS = 'CLEAR_ITEMS'
 
 export function showList() {
     return { type: SHOW_LIST }
@@ -15,4 +16,8 @@ export function showAdd() {
 
 export function addItems(newItems) {
     return { type: ADD_ITEMS, newItems: newItems }
+}
+
+export function clearItems() {
+    return { type: CLEAR_ITEMS }
 }
