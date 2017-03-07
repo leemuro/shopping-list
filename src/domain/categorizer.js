@@ -25,11 +25,9 @@ function itemsInNoCategory(items, categories) {
 
 export default function categorizeItems(items) {
     let categories = getCategories()
-    let result = categories.map(c => {
-        return {
-            name: c.name,
-            items: itemsInCategory(items, c, categories)
-        }
-    }) 
-    return result.filter(x => Object.keys(x.items).length > 0)
+    let result = categories.reduce((obj, c) => {
+        obj[c.name] = itemsInCategory(items, c, categories)
+        return obj
+    }, {}) 
+    return filterObject(result, x => Object.keys(x).length > 0)
 }

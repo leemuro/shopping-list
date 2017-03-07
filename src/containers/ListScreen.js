@@ -3,7 +3,6 @@ import NavBar from '../components/NavBar'
 import ShoppingList from '../components/ShoppingList'
 import { connect } from 'react-redux'
 import { showAdd, clearItems, toggleItem } from '../actions'
-import categorizeItems from '../domain/categorizer'
 
 class ListScreen extends Component {
     constructor(props) {
@@ -39,14 +38,14 @@ class ListScreen extends Component {
     onAddClick() {
         this.props.onAddClick()
     }
-    onItemClick(itemId) {
-        this.props.onItemClick(itemId)
+    onItemClick(categoryName, itemId) {
+        this.props.onItemClick(categoryName, itemId)
     }
 }
 
 function mapStateToProps(state) {
     return {
-        categorizedItems: categorizeItems(state.items)
+        categorizedItems: state.categorizedItems
     }
 }
 
@@ -58,8 +57,8 @@ function mapDispatchToProps(dispatch) {
         onAddClick: () => {
             dispatch(showAdd())
         },
-        onItemClick: (itemId) => {
-            dispatch(toggleItem(itemId))
+        onItemClick: (categoryName, itemId) => {
+            dispatch(toggleItem(categoryName, itemId))
         }
     }
 }

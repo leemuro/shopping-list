@@ -9,9 +9,12 @@ import {
   TOGGLE_ITEM 
 } from '../actions'
 
+import categorizeItems from '../domain/categorizer'
+
 const initialState = { 
   screen: LIST_SCREEN,
-  items: {}
+  rawItems: {},
+  categorizedItems: {}
 }
 
 export default function appReducer(state = initialState, action) {
@@ -25,25 +28,36 @@ export default function appReducer(state = initialState, action) {
         screen: ADD_SCREEN
       })
     case ADD_ITEMS: 
-      let newItems = action.newItems.reduce((obj, i) => {
+      let newRawItems = action.newItems.reduce((obj, i) => {
         obj[Gun.text.random()] = { description: i, completed: false }
         return obj
-      }, state.items)
+      }, state.rawItems)
       return Object.assign({}, state, {
-        items: newItems,
+        rawItems: newRawItems,
+        categorizedItems: categorizeItems(newRawItems),
         screen: LIST_SCREEN
       })
     case CLEAR_ITEMS:
       return Object.assign({}, state, {
-        items: {}
+        rawItems: {},
+        categorizedItems: {}
       })
     case TOGGLE_ITEM:
       return Object.assign({}, state, {
-        items: {
-          ...state.items,
-          [action.itemId]: Object.assign({}, state.items[action.itemId], { 
-            completed: !state.items[action.itemId].completed 
+        rawItems: {
+          ...state.rawItems,
+          [action.itemId]: Object.assign({}, state.rawItems[action.itemId], { 
+            completed: !state.rawItems[action.itemId].completed 
           })
+        },
+        categorizedItems: {
+          ...state.categorizedItems,
+          [action.categoryName]: {
+            ...state.categorizedItems[action.categoryName],
+            [action.itemId]: Object.assign({}, state.categorizedItems[action.categoryName][action.itemId], { 
+              completed: !state.categorizedItems[action.categoryName][action.itemId].completed 
+            })
+          }
         }
       })
     default:

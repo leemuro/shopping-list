@@ -23,6 +23,6 @@ export function clearItems() {
     return { type: CLEAR_ITEMS }
 }
 
-export function toggleItem(itemId) {
-    return { type: TOGGLE_ITEM, itemId: itemId }
+export function toggleItem(categoryName, itemId) {
+    return { type: TOGGLE_ITEM, categoryName: categoryName, itemId: itemId }
 }
