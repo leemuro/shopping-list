@@ -15,17 +15,16 @@ class AddScreen extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <NavBar
-                        leftItem={
-                            <button onClick={this.onCancelClick}>Cancel</button>
-                        }
-                        title="Add Items"
-                        rightItem={
-                            <button onClick={this.onDoneClick}>Done</button>
-                        }
-                    />
-                </div>
+                <NavBar
+                    leftItem={
+                        <button onClick={this.onCancelClick}>Cancel</button>
+                    }
+                    title="Add Items"
+                    rightItem={
+                        <button onClick={this.onDoneClick}>Done</button>
+                    }
+                    fixed={false}
+                />
                 <AddItemsBox onChange={this.onAddItemsChange} />
             </div>
         )

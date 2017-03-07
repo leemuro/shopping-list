@@ -3,7 +3,7 @@ html, body, #root, #root > div {
     font-family: Droid Sans, Arial, sans-serif;
 }
 
-body, div, ul, li {
+body, div, h1, ul, li {
     margin: 0;
     padding: 0;
     box-sizing: border-box;

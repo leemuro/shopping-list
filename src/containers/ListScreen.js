@@ -14,17 +14,16 @@ class ListScreen extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <NavBar 
-                        leftItem={
-                            <button onClick={this.onClearClick}>Clear</button>
-                        }
-                        title="Shopping List"
-                        rightItem={
-                            <button onClick={this.onAddClick}>Add</button>
-                        }
-                    />
-                </div>
+                <NavBar 
+                    leftItem={
+                        <button onClick={this.onClearClick}>Clear</button>
+                    }
+                    title="Shopping List"
+                    rightItem={
+                        <button onClick={this.onAddClick}>Add</button>
+                    }
+                    fixed={true}
+                />
                 <ShoppingList categorizedItems={this.props.categorizedItems} />
             </div>
         )

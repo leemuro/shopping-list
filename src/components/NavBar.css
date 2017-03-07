@@ -5,6 +5,11 @@
     color: #fff;
 }
 
+.navbar-fixed {
+    position: fixed;
+    width: 100%;
+}
+
 .navbar-item {
     flex: 1;
     display: flex;
