@@ -26,6 +26,7 @@ class ListScreen extends Component {
                 />
                 <ShoppingList 
                     categorizedItems={this.props.categorizedItems} 
+                    itemCompletionStates={this.props.itemCompletionStates}
                     onItemClick={this.onItemClick}
                 />
             </div>
@@ -38,14 +39,15 @@ class ListScreen extends Component {
     onAddClick() {
         this.props.onAddClick()
     }
-    onItemClick(categoryName, itemId) {
-        this.props.onItemClick(categoryName, itemId)
+    onItemClick(itemId) {
+        this.props.onItemClick(itemId)
     }
 }
 
 function mapStateToProps(state) {
     return {
-        categorizedItems: state.categorizedItems
+        categorizedItems: state.categorizedItems,
+        itemCompletionStates: state.itemCompletionStates
     }
 }
 
@@ -57,8 +59,8 @@ function mapDispatchToProps(dispatch) {
         onAddClick: () => {
             dispatch(showAdd())
         },
-        onItemClick: (categoryName, itemId) => {
-            dispatch(toggleItem(categoryName, itemId))
+        onItemClick: (itemId) => {
+            dispatch(toggleItem(itemId))
         }
     }
 }

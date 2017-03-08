@@ -13,7 +13,8 @@ import categorizeItems from '../domain/categorizer'
 
 const initialState = { 
   screen: LIST_SCREEN,
-  rawItems: {},
+  items: {},
+  itemCompletionStates: {},
   categorizedItems: {}
 }
 
@@ -30,42 +31,36 @@ export default function appReducer(state = initialState, action) {
       })
       
     case ADD_ITEMS: 
-      let newRawItems = action.newItems.reduce((obj, i) => {
-        obj[Gun.text.random()] = { description: i, completed: false }
+      let newItemStates = action.newItems.reduce((obj, i) => {
+        let itemId = Gun.text.random()
+        obj.items[itemId] = { description: i }
+        obj.itemCompletionStates[itemId] = false
         return obj
-      }, state.rawItems)
-      
+      }, { 
+        items: state.items, 
+        itemCompletionStates: state.itemCompletionStates 
+      })
+
       return Object.assign({}, state, {
-        rawItems: newRawItems,
-        categorizedItems: categorizeItems(newRawItems),
+        items: newItemStates.items,
+        itemCompletionStates: newItemStates.itemCompletionStates,
+        categorizedItems: categorizeItems(newItemStates.items),
         screen: LIST_SCREEN
       })
       
     case CLEAR_ITEMS:
       return Object.assign({}, state, {
-        rawItems: {},
+        items: {},
         categorizedItems: {}
       })
       
     case TOGGLE_ITEM:
-      let rawItem = state.rawItems[action.itemId]
-      let category = state.categorizedItems[action.categoryName]
-      let categoryItem = category[action.itemId]
-      
       return Object.assign({}, state, {
-        rawItems: Object.assign({}, state.rawItems, {
-          [action.itemId]: Object.assign({}, rawItem, { 
-            completed: !rawItem.completed
-          })
-        }),
-        categorizedItems: Object.assign({}, state.categorizedItems, {
-          [action.categoryName]: Object.assign({}, category, {
-            [action.itemId]: Object.assign({}, categoryItem, { 
-              completed: !categoryItem.completed 
-            })
-          })
+        itemCompletionStates: Object.assign({}, state.itemCompletionStates, {
+          [action.itemId]: !state.itemCompletionStates[action.itemId]
         })
       })
+      
     default:
       return state
   }
