@@ -6,9 +6,12 @@ import {
   SHOW_ADD, 
   ADD_ITEMS, 
   CLEAR_ITEMS, 
-  TOGGLE_ITEM 
+  TOGGLE_ITEM,
+  SYNC_ITEMS,
+  SYNC_COMPLETION_STATES 
 } from '../actions'
 
+import filterObject from '../domain/filterObject'
 import categorizeItems from '../domain/categorizer'
 
 const initialState = { 
@@ -18,50 +21,54 @@ const initialState = {
   categorizedItems: {}
 }
 
-export default function appReducer(state = initialState, action) {
-  switch(action.type) {
-    case SHOW_LIST:
-      return Object.assign({}, state, {
-        screen: LIST_SCREEN
-      })
-      
-    case SHOW_ADD:
-      return Object.assign({}, state, {
-        screen: ADD_SCREEN
-      })
-      
-    case ADD_ITEMS: 
-      let newItemStates = action.newItems.reduce((obj, i) => {
-        let itemId = Gun.text.random()
-        obj.items[itemId] = { description: i }
-        obj.itemCompletionStates[itemId] = false
-        return obj
-      }, { 
-        items: state.items, 
-        itemCompletionStates: state.itemCompletionStates 
-      })
+export default function createAppReducer(gunList) {
+  return function appReducer(state = initialState, action) {
+    switch(action.type) {
+      case SHOW_LIST:
+        return Object.assign({}, state, { screen: LIST_SCREEN })
+        
+      case SHOW_ADD:
+        return Object.assign({}, state, { screen: ADD_SCREEN })
+        
+      case ADD_ITEMS: 
+        let added = action.newItems.reduce((o, i) => {
+          let itemId = Gun.text.random()
+          o.items[itemId] = { description: i }
+          o.completionStates[itemId] = false
+          return o
+        }, { items: {}, completionStates: {} })
+        
+        gunList.get('items').put(added.items)
+        gunList.get('itemCompletionStates').put(added.completionStates)
 
-      return Object.assign({}, state, {
-        items: newItemStates.items,
-        itemCompletionStates: newItemStates.itemCompletionStates,
-        categorizedItems: categorizeItems(newItemStates.items),
-        screen: LIST_SCREEN
-      })
-      
-    case CLEAR_ITEMS:
-      return Object.assign({}, state, {
-        items: {},
-        categorizedItems: {}
-      })
-      
-    case TOGGLE_ITEM:
-      return Object.assign({}, state, {
-        itemCompletionStates: Object.assign({}, state.itemCompletionStates, {
-          [action.itemId]: !state.itemCompletionStates[action.itemId]
+        return Object.assign({}, state, { screen: LIST_SCREEN })
+        
+      case CLEAR_ITEMS:
+        Object.keys(state.items).forEach(itemId => {
+          gunList.get('items').path(itemId).put(null)
         })
-      })
-      
-    default:
-      return state
+        return state
+        
+      case TOGGLE_ITEM:
+        let completed = state.itemCompletionStates[action.itemId];
+        gunList.get('itemCompletionStates').path(action.itemId).put(!completed)
+        return state
+        
+      case SYNC_ITEMS: 
+        let newItems = Object.assign({}, state.items, action.items)
+        let filteredItems = filterObject(newItems, i => i != null)
+        return Object.assign({}, state, { 
+          items: filteredItems,
+          categorizedItems: categorizeItems(filteredItems)
+        })
+
+      case SYNC_COMPLETION_STATES:
+        let newCompletionStates = Object.assign({}, state.itemCompletionStates, action.itemCompletionStates)
+        let filteredCompletionStates = filterObject(newCompletionStates, i => i != null)
+        return Object.assign({}, state, { itemCompletionStates: filteredCompletionStates })
+        
+      default:
+        return state
+    }
   }
 }
