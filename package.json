@@ -9,7 +9,7 @@
     "gun": "^0.6.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-scripts": "0.9.0"
+    "react-scripts": "0.9.0",
     "redux": "^3.6.0"
   },
   "scripts": {
