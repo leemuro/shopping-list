@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import createAppReducer from './reducers'
 import App from './containers/App'
 import { syncItems, syncCompletionStates } from './actions'
+import bufferedSync from './util/bufferedSync'
 
 const gunPath = location.origin + '/gun'
 const gun = Gun(gunPath)
@@ -16,37 +17,8 @@ const gunList = gun.get(window.location.hash.substr(1));
 let appReducer = createAppReducer(gunList)
 let store = createStore(appReducer)
 
-function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
-};
-
-function createBufferedSync(syncAction) {
-  var buffer = {}
-
-  var dispatchSync = debounce(function() {
-    store.dispatch(syncAction(buffer))
-    buffer = {}
-  }, 50)
-
-  return function(item, key) {
-    buffer = Object.assign({}, buffer, {[key]: item})
-    dispatchSync()
-  }
-}
-
-gunList.path('items').map(createBufferedSync(syncItems))
-gunList.path('itemCompletionStates').map(createBufferedSync(syncCompletionStates))
+gunList.path('items').map(bufferedSync(store, syncItems))
+gunList.path('itemCompletionStates').map(bufferedSync(store, syncCompletionStates))
 
 ReactDOM.render(
   <Provider store={store}>
