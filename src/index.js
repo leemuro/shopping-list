@@ -9,8 +9,9 @@ import createAppReducer from './reducers'
 import App from './containers/App'
 import { syncItems, syncCompletionStates } from './actions'
 
-const gun = Gun('http://localhost:8080/gun');
-const gunList = gun.get(window.location.pathname.substr(1));
+const gunPath = location.origin + '/gun'
+const gun = Gun(gunPath)
+const gunList = gun.get(window.location.hash.substr(1));
 
 let appReducer = createAppReducer(gunList)
 let store = createStore(appReducer)
