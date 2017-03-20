@@ -38,10 +38,18 @@ export default function createAppReducer(gunList) {
           return o
         }, { items: {}, completionStates: {} })
         
+        let updatedItems = Object.assign({}, state.items, added.items)
+        let updatedCompletionStates = Object.assign({}, state.itemCompletionStates, added.completionStates)
+        
         gunList.get('items').put(added.items)
         gunList.get('itemCompletionStates').put(added.completionStates)
-
-        return Object.assign({}, state, { screen: LIST_SCREEN })
+        
+        return Object.assign({}, state, { 
+          screen: LIST_SCREEN,
+          items: updatedItems,
+          categorizedItems: categorizeItems(updatedItems),
+          itemCompletionStates: updatedCompletionStates 
+        })
         
       case CLEAR_ITEMS:
         Object.keys(state.items).forEach(itemId => {
