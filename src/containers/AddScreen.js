@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import AddItemsBox from '../components/AddItemsBox'
 import { connect } from 'react-redux'
-import { showList, addItems } from '../actions'
+import { showList } from '../actions'
+import { addItems } from '../stores/listStore'
 
 class AddScreen extends Component {
     constructor(props) {
@@ -49,7 +50,8 @@ function mapDispatchToProps(dispatch) {
             dispatch(showList())
         },
         onDoneClick: (newItems) => {
-            dispatch(addItems(newItems))
+            addItems(newItems)
+            dispatch(showList())
         }
     }
 }
