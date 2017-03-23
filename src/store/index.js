@@ -20,7 +20,7 @@ export class RootStore {
         this.store = createStore(rootReducer)
         firebase.initializeApp(firebaseConfig);
         
-        this.listName = window.location.hash.substr(1)
+        this.listName = window.location.pathname.substr(1)
         this.itemsRef = firebase.database().ref(this.listName + '/items')
         this.statesRef = firebase.database().ref(this.listName + '/completionStates')
         
