@@ -3,8 +3,8 @@ export const ADD_SCREEN = 'ADD_SCREEN'
 
 export const SHOW_LIST = 'SHOW_LIST'
 export const SHOW_ADD = 'SHOW_ADD'
-export const SYNC_ITEMS = 'SYNC_ITEMS'
-export const SYNC_COMPLETION_STATES = 'SYNC_COMPLETION_STATES'
+export const SET_ITEM = 'SET_ITEM'
+export const SET_ITEM_COMPLETION = 'SET_ITEM_COMPLETION'
 
 export function showList() {
     return { type: SHOW_LIST }
@@ -14,10 +14,10 @@ export function showAdd() {
     return { type: SHOW_ADD }
 }
 
-export function syncItems(items) {
-    return { type: SYNC_ITEMS, items: items }
+export function setItem(itemId, item) {
+    return { type: SET_ITEM, itemId, item: item }
 }
 
-export function syncCompletionStates(itemCompletionStates) {
-    return { type: SYNC_COMPLETION_STATES, itemCompletionStates: itemCompletionStates }
+export function setItemCompletion(itemId, completed) {
+    return { type: SET_ITEM_COMPLETION, itemId: itemId, completed: completed }
 }

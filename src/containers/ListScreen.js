@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar'
 import ShoppingList from '../components/ShoppingList'
 import { connect } from 'react-redux'
 import { showAdd } from '../actions'
-import { clearItems, toggleItem } from '../stores/listStore'
+import { clearItems, toggleItem } from '../store'
 
 class ListScreen extends Component {
     constructor(props) {

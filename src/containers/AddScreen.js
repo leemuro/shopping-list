@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar'
 import AddItemsBox from '../components/AddItemsBox'
 import { connect } from 'react-redux'
 import { showList } from '../actions'
-import { addItems } from '../stores/listStore'
+import { addItems } from '../store'
 
 class AddScreen extends Component {
     constructor(props) {
