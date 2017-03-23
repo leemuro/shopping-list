@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import ShoppingList from '../components/ShoppingList'
 import { connect } from 'react-redux'
-import { showAdd } from '../actions'
-import { clearItems, toggleItem } from '../store'
+import { rootStore } from '../store'
 
 class ListScreen extends Component {
     constructor(props) {
@@ -55,13 +54,13 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         onClearClick: () => {
-            clearItems()
+            rootStore.clearItems()
         },
         onAddClick: () => {
-            dispatch(showAdd())
+            rootStore.showAddScreen()
         },
         onItemClick: (itemId) => {
-            toggleItem(itemId)
+            rootStore.toggleItem(itemId)
         }
     }
 }

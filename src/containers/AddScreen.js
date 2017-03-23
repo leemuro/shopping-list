@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../components/NavBar'
 import AddItemsBox from '../components/AddItemsBox'
 import { connect } from 'react-redux'
-import { showList } from '../actions'
-import { addItems } from '../store'
+import { rootStore } from '../store'
 
 class AddScreen extends Component {
     constructor(props) {
@@ -47,11 +46,11 @@ class AddScreen extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         onCancelClick: () => {
-            dispatch(showList())
+            rootStore.showListScreen()
         },
         onDoneClick: (newItems) => {
-            addItems(newItems)
-            dispatch(showList())
+            rootStore.addItems(newItems)
+            rootStore.showListScreen()
         }
     }
 }

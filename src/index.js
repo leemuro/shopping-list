@@ -3,10 +3,10 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { initializeStore } from './store'
+import { rootStore } from './store'
 import App from './containers/App'
 
-let store = initializeStore()
+let store = rootStore.getReduxStore()
 
 ReactDOM.render(
   <Provider store={store}>

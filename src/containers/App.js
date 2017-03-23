@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import AddScreen from './AddScreen'
 import ListScreen from './ListScreen'
-import { ADD_SCREEN, LIST_SCREEN } from '../actions'
+import { ADD_SCREEN, LIST_SCREEN } from '../domain/screens'
 
 class App extends Component {
   render() {

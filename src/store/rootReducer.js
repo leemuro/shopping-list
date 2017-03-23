@@ -1,14 +1,7 @@
-import { 
-  LIST_SCREEN, 
-  ADD_SCREEN, 
-  SHOW_LIST, 
-  SHOW_ADD, 
-  SET_ITEM,
-  SET_ITEM_COMPLETION
-} from '../actions'
-
 import filterObject from '../domain/filterObject'
 import categorizeItems from '../domain/categorizer'
+import { LIST_SCREEN, ADD_SCREEN } from '../domain/screens'
+import { SHOW_LIST, SHOW_ADD, SET_ITEM, SET_ITEM_COMPLETION } from './actions'
 
 const initialState = { 
   screen: LIST_SCREEN,
@@ -17,7 +10,7 @@ const initialState = {
   categorizedItems: {}
 }
 
-export default function appReducer(state = initialState, action) {
+export default function rootReducer(state = initialState, action) {
   switch(action.type) {
     case SHOW_LIST:
       return Object.assign({}, state, { screen: LIST_SCREEN })
