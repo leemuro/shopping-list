@@ -25,7 +25,8 @@ class ListScreen extends Component {
                     fixed={true}
                 />
                 <ShoppingList 
-                    categorizedItems={this.props.categorizedItems} 
+                    categorizedItemIds={this.props.categorizedItemIds} 
+                    items={this.props.items}
                     itemCompletionStates={this.props.itemCompletionStates}
                     onItemClick={this.onItemClick}
                 />
@@ -46,7 +47,8 @@ class ListScreen extends Component {
 
 function mapStateToProps(state) {
     return {
-        categorizedItems: state.categorizedItems,
+        categorizedItemIds: state.categorizedItemIds,
+        items: state.items,
         itemCompletionStates: state.itemCompletionStates
     }
 }

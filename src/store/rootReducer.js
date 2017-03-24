@@ -1,5 +1,4 @@
-import filterObject from '../domain/filterObject'
-import categorizeItems from '../domain/categorizer'
+import categorizeItem from '../domain/categorizer'
 import { LIST_SCREEN, ADD_SCREEN } from '../domain/screens'
 import { SHOW_LIST, SHOW_ADD, SET_ITEM, SET_ITEM_COMPLETION } from './actions'
 
@@ -7,7 +6,7 @@ const initialState = {
   screen: LIST_SCREEN,
   items: {},
   itemCompletionStates: {},
-  categorizedItems: {}
+  categorizedItemIds: {}
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -20,17 +19,15 @@ export default function rootReducer(state = initialState, action) {
 
     case SET_ITEM:
       let newItems = Object.assign({}, state.items, { [action.itemId]: action.item })
-      let filteredItems = filterObject(newItems, i => i != null)
       return Object.assign({}, state, { 
-        items: filteredItems,
-        categorizedItems: categorizeItems(filteredItems)
+        items: newItems,
+        categorizedItemIds: categorizeItem(state.categorizedItemIds, action.item, action.itemId)
       })
 
     case SET_ITEM_COMPLETION:
       let newStates = Object.assign({}, state.itemCompletionStates, { [action.itemId]: action.completed })
-      let filteredStates = filterObject(newStates, i => i != null)
       return Object.assign({}, state, { 
-        itemCompletionStates: filteredStates
+        itemCompletionStates: newStates
       })
 
     default:
