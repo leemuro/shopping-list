@@ -1,16 +1,37 @@
 import categorizeItem from '../domain/categorizer'
-import { LIST_SCREEN, ADD_SCREEN } from '../domain/screens'
-import { SHOW_LIST, SHOW_ADD, SET_ITEM, SET_ITEM_COMPLETION } from './actions'
+import { LOADING_SCREEN, LIST_SCREEN, ADD_SCREEN } from '../domain/screens'
+import { 
+  ITEMS_LOADED, 
+  STATES_LOADED, 
+  SHOW_LIST, 
+  SHOW_ADD, 
+  SET_ITEM, 
+  SET_ITEM_COMPLETION 
+} from './actions'
 
 const initialState = { 
-  screen: LIST_SCREEN,
+  screen: LOADING_SCREEN,
   items: {},
+  itemsLoaded: false,
   itemCompletionStates: {},
+  itemCompletionStatesLoaded: false,
   categorizedItemIds: {}
 }
 
 export default function rootReducer(state = initialState, action) {
   switch(action.type) {
+    case ITEMS_LOADED:
+      if(state.itemCompletionStatesLoaded)
+        return Object.assign({}, state, { itemsLoaded: true, screen: LIST_SCREEN })
+      else
+        return Object.assign({}, state, { itemsLoaded: true })
+
+    case STATES_LOADED:
+      if(state.itemsLoaded)
+        return Object.assign({}, state, { itemCompletionStatesLoaded: true, screen: LIST_SCREEN })
+      else
+        return Object.assign({}, state, { itemCompletionStatesLoaded: true })
+
     case SHOW_LIST:
       return Object.assign({}, state, { screen: LIST_SCREEN })
       

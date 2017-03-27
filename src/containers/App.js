@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import LoadingScreen from './LoadingScreen'
 import AddScreen from './AddScreen'
 import ListScreen from './ListScreen'
-import { ADD_SCREEN, LIST_SCREEN } from '../domain/screens'
+import { LOADING_SCREEN, ADD_SCREEN, LIST_SCREEN } from '../domain/screens'
 
 class App extends Component {
   render() {
     const { screen } = this.props
     
     switch(screen) {
+      case LOADING_SCREEN:
+        return <LoadingScreen />
       case ADD_SCREEN:
         return <AddScreen />
       case LIST_SCREEN:
