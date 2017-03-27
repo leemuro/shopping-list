@@ -1,23 +1,23 @@
 .shopping-list {
-    padding-top: 3em;
+  padding-top: 3em;
 }
 
 .shopping-list .shopping-category {
-    padding: 1em;
-    border-bottom: 1px solid #eee;
+  padding: 1em;
+  border-bottom: 1px solid #eee;
 }
 
 .shopping-list .shopping-item {
-    padding: 1em;
-    padding-left: 2em;
-    border-bottom: 1px solid #eee;
+  padding: 1em;
+  padding-left: 2em;
+  border-bottom: 1px solid #eee;
 }
 
 .shopping-list .shopping-item-completed {
-    text-decoration: line-through;
-    color: #ccc;
+  text-decoration: line-through;
+  color: #ccc;
 }
 
 .shopping-list .no-items {
-    text-align: center;
+  text-align: center;
 }
