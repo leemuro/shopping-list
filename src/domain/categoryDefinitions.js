@@ -21,7 +21,7 @@ export const categoryDefinitions = {
       "salak", "satsuma", "strawberry", "strawberries", "tamarillo", "tamarind", "yuzu", "romaine", "celery"
     ], 
     exclude: [ 
-      "can", "cans", "dried", "dry", "powder", "tsp", "tbsp", "teaspoon", "teaspoons", "tablespoon", "tablespoons", 
+      "can", "cans", "canned", "dried", "dry", "powder", "tsp", "tbsp", "teaspoon", "teaspoons", "tablespoon", "tablespoons", 
       "frozen", "juice", "jam", "jelly", "sauce", "with green chilis", "ground", "dr pepper", "dr. pepper", 
       "thawed", "oil", "pop"
     ]
@@ -32,7 +32,7 @@ export const categoryDefinitions = {
       "goose", "quail", "carp", "catfish", "salmon", "tilapia", "herring", "fish", "lobster", "lobsters", 
       "shrimp", "mussel", "museels", "prawn", "prawns", "oysters"
     ], 
-    exclude: [ "can", "cans", "broth", "stock", "bouillon" ]
+    exclude: [ "can", "cans", "canned", "broth", "stock", "bouillon" ]
   },
   "Breads/Baked Goods": {
     match: [ 
@@ -49,7 +49,7 @@ export const categoryDefinitions = {
     exclude: [ "oil" ]
   },
   "Condiments": {
-    match: [ "ketchup", "mustard", "relish", "sauce", "mayo" ], 
+    match: [ "ketchup", "mustard", "mustards", "relish", "sauce", "sauces", "mayo", "dressing" ], 
     exclude: [ "tomato sauce", "pasta sauce" ]
   },
   "Spices/Herbs": {
@@ -59,7 +59,8 @@ export const categoryDefinitions = {
       "celery seed", "chicory", "chili powder", "garlic", "chive", "chives", "cilantro", "cinnamon", "clove", "coriander", 
       "cumin", "curry", "dill", "fennel", "fenugreek", "ginger", "lavender", "marjoram", "mint", "mustard", "nutmeg", 
       "oregano", "paprika", "parsley", "rosemary", "saffron", "sage", "safflower", "tarragon", "thyme", "turmeric", 
-      "vanilla", "salt", "powder", "dried onion", "dried minced onion", "pepper to taste", "salt to taste"
+      "vanilla", "salt", "powder", "dried onion", "dried minced onion", "pepper to taste", "salt to taste", 
+      "seasoning", "seasonings"
     ], 
     exclude: []
   },
