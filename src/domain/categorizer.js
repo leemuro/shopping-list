@@ -1,11 +1,9 @@
-import { categoryDefinitions } from './categoryDefinitions'
-
-export default function categorizeItem(categorizedItemIds, item, itemId) {
+export default function categorizeItem(categoryDefinitions, categorizedItemIds, item, itemId) {
   if(item == null) return categorizedItemIds
   
   return Object.keys(categoryDefinitions).reduce((result, cid) => {
     let cd = categoryDefinitions[cid]
-    let isMatch = (cd.match.length === 0 && itemMatchesNoCategory(item)) || itemMatches(item, cd)
+    let isMatch = (cd.match.length === 0 && itemMatchesNoCategory(item, categoryDefinitions)) || itemMatches(item, cd)
     let itemIds = categorizedItemIds[cid] === undefined ? [] : categorizedItemIds[cid]
     result[cid] = isMatch ? [...itemIds, itemId] : itemIds
     return result
@@ -23,6 +21,6 @@ function itemMatchesWord(item, word) {
   return item.description.toLowerCase().match(regex)
 }
 
-function itemMatchesNoCategory(item) {
+function itemMatchesNoCategory(item, categoryDefinitions) {
   return !Object.keys(categoryDefinitions).some(cid => itemMatches(item, categoryDefinitions[cid]))
 }

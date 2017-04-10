@@ -1,4 +1,6 @@
 import categorizeItem from '../domain/categorizer'
+import { categoryDefinitions } from '../domain/categoryDefinitions'
+
 import { LOADING_SCREEN, LIST_SCREEN, ADD_SCREEN } from '../domain/screens'
 import { 
   ITEMS_LOADED, 
@@ -42,7 +44,7 @@ export default function rootReducer(state = initialState, action) {
       let newItems = Object.assign({}, state.items, { [action.itemId]: action.item })
       return Object.assign({}, state, { 
         items: newItems,
-        categorizedItemIds: categorizeItem(state.categorizedItemIds, action.item, action.itemId)
+        categorizedItemIds: categorizeItem(categoryDefinitions, state.categorizedItemIds, action.item, action.itemId)
       })
 
     case SET_ITEM_COMPLETION:
