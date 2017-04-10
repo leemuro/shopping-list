@@ -1,6 +1,5 @@
 import categorizeItem from './categorizer'
 
-
 it('matches item if is a matcher word', () => {
   let categories = {
     "Produce": { 

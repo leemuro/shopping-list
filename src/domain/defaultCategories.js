@@ -1,4 +1,4 @@
-export const categoryDefinitions = {
+export const defaultCategories = {
   "Produce": {
     match: [ 
       "asparagus", "arugula", "cabbage", "bean", "beans", "garlic", "beet", "beets", "onion", "onions", "bok choy", "dill", 
