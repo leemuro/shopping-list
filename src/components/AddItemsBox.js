@@ -7,6 +7,7 @@ export default function AddItemsBox({onChange}) {
       <textarea 
         onChange={onChange} 
         placeholder="Type to add multiple items, one per line"
+        autoFocus="true"
       />
     </div>
   )
