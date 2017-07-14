@@ -58,3 +58,33 @@ it('matches a fallthrough/other category if no other categories matched', () => 
   let items = categorizeItem(categories, {}, { description: "bananas" }, 1)
   expect(items).toEqual({ "Produce": [], "Other": [1] })
 });
+
+it('matches a fallthrough/other category if another categoy is matched, but excluded', () => {
+  let categories = {
+    "Produce": { 
+      match: [ "grape" ], 
+      exclude: [ "jelly" ] 
+    },
+    "Other": {
+      match: [],
+      exclude: []
+    }
+  }
+  let items = categorizeItem(categories, {}, { description: "grape jelly" }, 1)
+  expect(items).toEqual({ "Produce": [], "Other": [1] })
+});
+
+it('matches the category with highest scored match', () => {
+  let categories = {
+    "Produce": { 
+      match: [ "raspberry" ], 
+      exclude: [] 
+    },
+    "Condiments": {
+      match: [ "* jelly"],
+      exclude: []
+    }
+  }
+  let items = categorizeItem(categories, {}, { description: "raspberry jelly" }, 1)
+  expect(items).toEqual({ "Produce": [], "Condiments": [1] })
+});
