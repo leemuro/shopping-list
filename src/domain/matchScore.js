@@ -2,13 +2,19 @@ export default function matchScore(match, candidate) {
   if(candidate == null)
     return 0;
 
-  let regex = matchWords.reduce((result, word) => {
+  // Turn the matcher syntax into a regex: ex: "* apple" -> "(.*) apple"
+  let matchWords = match.split(" ");
+  let regexString = matchWords.reduce((result, word) => {
     if(word == "*")
       return result == "" ? "(.*)" : result + " (.*)"
     else
       return result == "" ? word : result + " " + word;
-  }, "");
+  }, "")
 
-  if(candidate.toLowerCase().match(new RegExp(regex.toLowerCase())))
+  let regex = new RegExp(regexString.toLowerCase() + '(\\W+|$)')
+
+  if(candidate.toLowerCase().match(regex))
     return matchWords.length;
+
+  return 0;
 }

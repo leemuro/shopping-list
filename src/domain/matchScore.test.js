@@ -5,7 +5,8 @@ let tests =
   , { matcher: "cookie", candidate: "cookie crisp", score: 1 }
   , { matcher: "cookie", candidate: "banana", score: 0 }
   , { matcher: "cookie", candidate: "", score: 0 }
-  , { matcher: "cookie", candidate: null, score: 0 }
+  , { matcher: "apple", candidate: "applesauce", score: 0 }
+  , { matcher: "apple", candidate: null, score: 0 }
 
   , { matcher: "chocolate cookie", candidate: "chocolate cookie", score: 2 }
   , { matcher: "chocolate cookie", candidate: "chocolate cookie with sprinkles", score: 2 }
