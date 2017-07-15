@@ -53,6 +53,13 @@ export const defaultCategories = {
     ], 
     exclude: []
   },
+  "Coffee/Hot Beverages": {
+    match: [
+      "coffee", "keurig", "keurig *", "* keurig", "expresso", "espresso",
+      "kcups", "k-cups", "passion tea", "hot chocolate"
+    ],
+    exclude: []
+  },
   "Fats/Oils": {
     match: [
       "* oil"
@@ -93,7 +100,10 @@ export const defaultCategories = {
     exclude: []
   },
   "Frozen Goods": {
-    match: [ "frozen *", "freezer *", "* thawed", "thawed *", "ice cream", "* ice cream" ], 
+    match: [ 
+      "frozen *", "freezer *", "* thawed", "thawed *", "ice cream", "* ice cream",
+      "breakfast sandwiches"
+    ], 
     exclude: []
   },
   "Dairy": {
@@ -108,7 +118,7 @@ export const defaultCategories = {
   "Snacks/Chips": {
     match: [
       "* chips", "chips", "doritos", "fritos", "cheetos", "crackers", "cookies", "rice cakes",
-      "cheese sauce", "cheese dip", "queso dip", "queso", "nuts", "peanuts"
+      "cheese sauce", "cheese dip", "queso dip", "queso", "nuts", "peanuts", "freetos"
     ],
     exclude: [
       "chocolate chips"
@@ -119,9 +129,12 @@ export const defaultCategories = {
       "pop", "* pop", "soda", "* soda", "sodas", "* sodas", "bottled watter", "flavored water", 
       "fizzy water", "selzer", "selzter", "fizzies", "fizzy", "carbonated *",
       "juice", "* juice", "tea", "* tea", "coke", "* coke", "sprite", "dr pepper", "drink", "* drink",
-      "root beer"
+      "root beer", "rootbeer", "kool aid", "juice boxes", "capri sun"
     ], 
-    exclude: [ "orange", "lime juice", "juice * lime", "limes", "zest" ]
+    exclude: [ 
+      "orange", "lime juice", "juice * lime", "limes", "zest",
+      "kcups", "k-cups", "kcup", "k-cup", "coffee", "keurig", "passion tea"
+    ]
   },
   "Refrigerated Beverages": {
     match: [
