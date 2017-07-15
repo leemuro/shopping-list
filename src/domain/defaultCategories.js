@@ -115,6 +115,14 @@ export const defaultCategories = {
     ], 
     exclude: [ "condensed milk", "cheese sauce" ]
   },
+  "Cereals": {
+    match: [
+      "* cereal", "cereal *", "oatmeal", "oats", "* oatmeal", "* oats", "granola",
+      "honey bunches of oats", "lucky charms", "frosted flakes", "pops", "frosted mini wheats",
+      "quaker", "fruity pebbles", "cocoa pebbles", "cookie crisp", "cinnamon toast cruch", "kashi"
+    ],
+    exclude: []
+  },
   "Snacks/Chips": {
     match: [
       "* chips", "chips", "doritos", "fritos", "cheetos", "crackers", "cookies", "rice cakes",
@@ -145,9 +153,10 @@ export const defaultCategories = {
   "Alcohol": {
     match: [ 
       "beer", "beers", "wine", "vodka", "moscato", "chardonay", "pino grigio", "merlot", "vodka", "rum", 
-      "margarita", "tequila", "whisky", "whiskey", "bourbon"
+      "margarita", "tequila", "whisky", "whiskey", "bourbon", "palo santo", "dogfish", "great lakes *",
+      "bells *", "fat heads *"
     ], 
-    exclude: [ "vinegar", "cooking" ]
+    exclude: [ "vinegar", "cooking", "rootbeer", "root beer" ]
   },
   "Pet Supplies": {
     match: [
