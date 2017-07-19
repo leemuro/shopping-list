@@ -1,49 +1,67 @@
+import category from './category'
+import produce from '../categories/produce'
+
+let dairyProducts = category()
+  .include("milk")
+  .include("* milk")
+  .include("cream")
+  .include("* cream")
+  .include("yogurt")
+  .include("* yogurt")
+  .include("yogurt *")
+  .include("cream cheese")
+  .include("sour cream")
+  .include("cottage cheese")
+  .include("half and half")
+  .include("half & half")
+  .include("butter")
+  .exclude("condensed milk")
+
+let cheeses = category()
+  .include("cheese")
+  .include("cheeses")
+  .include("* cheese")
+  .include("* cheeses")
+  .include("cheese *")
+  .include("cheddar")
+  .include("swiss")
+  .include("colby")
+  .include("jack")
+  .include("ricotta")
+  .include("parmigiano")
+  .include("reggiano")
+  .include("muenster")
+  .include("gouda")
+  .include("romano")
+  .exclude("cheese sauce")
+  .exclude("cheese dip");
+
+let eggProducts = category()
+  .include("egg")
+  .include("eggs");
+
+
 export const defaultCategories = {
-  "Produce": {
-    match: [ 
-      "asparagus", "arugula", "cabbage", "bean", "beans", "garlic", "beet", "beets", "onion", "onions", "bok choy", "dill", 
-      "basil", "rosemary", "lettuce", "broccoli", "pea", "peas", "radish", "radishes", "rhubarb", "carrot", "carrots", 
-      "spinach", "cauliflower", "cucumber", "cucumbers", "chard", "spinach", "eggplant", "greens", "turnip", "turnips", 
-      "watercress", "endive", "escarole", "herbs", "leek", "leeks", "kale", "chive", "chives", "okra", "cilantro", "pepper", "peppers", 
-      "potato", "potatos", "potatoes", "mizuna", "corn", "tomato", "tomatoes", "watermelon", "watermelons", "melon", "melons", 
-      "thyme", "zucchini", "zucchinis", "squash", "rutabaga", "apple", "apples", "apricot", "apricots", "avocado", "avocados",
-      "avacado", "avacados", "banana", "bananas", "bilberry", "bilberries", "blackberry", "blackberries", 
-      "blackcurrant", "blueberry", "blueberries", "berries", "boysenberry", "boysenberries", "currant", "cherry", "cherries", 
-      "cherimoya", "cloudberry", "cloudberries", "coconut", "coconuts", "cranberry", "cranberries", "damson", "date", "dates", 
-      "dragonfruit", "dragonfruits", "durian", "elderberry", "elderberries", "feijoa", "fig", "figs", "goji", "berry", "gooseberry",
-      "gooseberries" , "grape", "grapes", "raisin", "raisins", "grapefruit", "grapefruits", "guava", "honeyberry", "huckleberry", 
-      "jabuticaba", "jackfruit", "jambul", "jujube", "kiwifruit", "kumquat", "lemon", "lime", "loquat", "longan", "lychee", "mango", 
-      "marionberry", "melon", "melons", "cantaloupe", "cataloupes", "honeydew", "honeydews", "watermelon", "watermelons", "fruit", 
-      "fruits", "mulberry", "mulberries", "nectarine", "nectarines", "nance", "orange", "oranges", "clementine", "clementines", 
-      "mandarine", "mandarins", "tangerine", "tangerines", "papaya", "passionfruit", "peach", "peaches", "pear", "pears", 
-      "persimmon", "physalis", "plantain", "plum", "plums", "prune", "prunes", "pineapple", "pineapples", "plumcot", "pomegranate", 
-      "pomegranates", "pomelo", "quince", "raspberry", "raspberries", "salmonberry", "salmonberries", "rambutan", "redcurrant", 
-      "salak", "satsuma", "strawberry", "strawberries", "tamarillo", "tamarind", "yuzu", "romaine", "celery", "lime", "limes",
-      "jalapeño", "jalapeños", "chilies", "chilis", "* zest", "zest *", "scallions", "ginger"
-    ], 
-    exclude: [ 
-      "dried", "dry", "powder", "ground", "paste"
-    ]
-  },
+  "Produce": produce,
   "Meat": {
-    match: [ 
+    includePatterns: [ 
       "chicken", "chickens", "beef", "steak", "pork", "turkey", "turkeys", "meat", "meats", "roast", "roasts", "duck", 
       "goose", "quail", "carp", "catfish", "salmon", "tilapia", "herring", "fish", "lobster", "lobsters", 
       "shrimp", "mussel", "mussels", "prawn", "prawns", "oysters"
     ], 
-    exclude: [ "bouillon" ]
+    excludePatterns: [ "bouillon" ]
   },
   "Breads/Baked Goods": {
-    match: [ 
+    includePatterns: [ 
       "bread", "* bread", "breads", "* breads", "tortilla", "* tortilla", "tortillas", "* tortillas",
       "wrap", "* wrap", "wraps", "* wraps", "pita", "* pita", "pitas", "* pitas",
       "muffin", "muffins", "* muffin", "* muffins", "bun", "* bun", "buns", "* buns",
       "roll", "* roll", "rolls", "* rolls"
     ], 
-    exclude: [ "cinnamon rolls" ]
+    excludePatterns: [ "cinnamon rolls" ]
   },
   "Canned/Jarred Goods": {
-    match: [ 
+    includePatterns: [ 
       "can *", "canned *", "cans *", "jar *", "jarred *", "jars *", 
       "can * *", "canned * *", "cans * *", "jar * *", "jarred * *", "jars * *", 
       "diced tomato", "crushed tomato", "tomato sauce", 
@@ -51,37 +69,37 @@ export const defaultCategories = {
       "stock", "* stock", "olive", "olives", "* bouillon",
       "pickles", "* pickles", "tomato paste", 
     ], 
-    exclude: []
+    excludePatterns: []
   },
   "Coffee/Hot Beverages": {
-    match: [
+    includePatterns: [
       "coffee", "keurig", "keurig *", "* keurig", "expresso", "espresso",
       "kcups", "k-cups", "passion tea", "hot chocolate"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Fats/Oils": {
-    match: [
+    includePatterns: [
       "* oil"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Pasta/Grains": {
-    match: [
+    includePatterns: [
       "past", "* pasta", "spaghetti", "penne", "linguini", "rice"
     ],
-    exclude: [ ]
+    excludePatterns: [ ]
   },
   "Condiments/Dressings": {
-    match: [ 
+    includePatterns: [ 
       "ketchup", "mustard", "* mustard", "relish", "* sauce", "* sauces", 
       "mayo", "* mayo", "mayonnaise", "* mayonnaise", "mayonaise", "* mayonaise", 
       "* dressing", "jam", "* jam", "jelly", "* jelly", "vinegar"
     ], 
-    exclude: [ "tomato sauce", "pasta sauce", "alfredo sauce" ]
+    excludePatterns: [ "tomato sauce", "pasta sauce", "alfredo sauce" ]
   },
   "Spices/Herbs": {
-    match: [ 
+    includePatterns: [ 
       "allspice", "all spice", "spice", "spices", "anise", "basil", "bay leaf", "bay leaves", "caraway", "cardamom", "cayenne", 
       "black pepper", "teaspoon pepper", "tsp pepper", "tsp. pepper", "tablespoon pepper", "tbsp pepper", "tbsp. pepper", 
       "celery seed", "chicory", "chili powder", "garlic", "chive", "chives", "cilantro", "cinnamon", "clove", "coriander", 
@@ -91,102 +109,97 @@ export const defaultCategories = {
       "seasoning", "seasonings", "* seasoning", "* seasonings", "black pepper", "ground pepper", "amarillo pepper",
       "mustard seed", "mustard seeds", "peppercorns"
     ], 
-    exclude: [ "fresh", "diced", "chopped", "* cloves", "cloves *", "bunch", "knob"]
+    excludePatterns: [ "fresh", "diced", "chopped", "* cloves", "cloves *", "bunch", "knob"]
   },
   "Baking Goods": {
-    match: [
+    includePatterns: [
       "sugar", "* sugar", "molasses"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Frozen Goods": {
-    match: [ 
+    includePatterns: [ 
       "frozen *", "freezer *", "* thawed", "thawed *", "ice cream", "* ice cream",
       "breakfast sandwiches"
     ], 
-    exclude: []
+    excludePatterns: []
   },
-  "Dairy": {
-    match: [ 
-      "egg", "eggs", "milk", "* milk", "cream", "cheese", "cheeses", "* cheese", "* cheeses", 
-      "yogurt", "yogurts", "cheddar", "swiss", "butter", 
-      "jack", "colby", "half and half", "half & half" , "ricotta",
-      "parmigiano", "reggiano", "romano"
-    ], 
-    exclude: [ "condensed milk", "cheese sauce" ]
-  },
+  "Dairy": category()
+    .includeCategory(dairyProducts)
+    .includeCategory(cheeses)
+    .includeCategory(eggProducts),
   "Cereals": {
-    match: [
+    includePatterns: [
       "* cereal", "cereal *", "oatmeal", "oats", "* oatmeal", "* oats", "granola",
       "honey bunches of oats", "lucky charms", "frosted flakes", "pops", "frosted mini wheats",
       "quaker", "fruity pebbles", "cocoa pebbles", "cookie crisp", "cinnamon toast cruch", "kashi"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Snacks/Chips": {
-    match: [
+    includePatterns: [
       "* chips", "chips", "doritos", "fritos", "cheetos", "crackers", "cookies", "rice cakes",
       "cheese sauce", "cheese dip", "queso dip", "queso", "nuts", "peanuts", "freetos"
     ],
-    exclude: [
+    excludePatterns: [
       "chocolate chips"
     ]
   },
   "Beverages": {
-    match: [ 
+    includePatterns: [ 
       "pop", "* pop", "soda", "* soda", "sodas", "* sodas", "bottled watter", "flavored water", 
       "fizzy water", "selzer", "selzter", "fizzies", "fizzy", "carbonated *",
       "juice", "* juice", "tea", "* tea", "coke", "* coke", "sprite", "dr pepper", "drink", "* drink",
       "root beer", "rootbeer", "kool aid", "juice boxes", "capri sun"
     ], 
-    exclude: [ 
+    excludePatterns: [ 
       "orange", "lime juice", "juice * lime", "limes", "zest",
       "kcups", "k-cups", "kcup", "k-cup", "coffee", "keurig", "passion tea"
     ]
   },
   "Refrigerated Beverages": {
-    match: [
+    includePatterns: [
       "orange juice", "lemonade", "* lemonade", "cold coffee", "cold brew"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Alcohol": {
-    match: [ 
+    includePatterns: [ 
       "beer", "beers", "wine", "vodka", "moscato", "chardonay", "pino grigio", "merlot", "vodka", "rum", 
       "margarita", "tequila", "whisky", "whiskey", "bourbon", "palo santo", "dogfish", "great lakes *",
       "bells *", "fat heads *"
     ], 
-    exclude: [ "vinegar", "cooking", "rootbeer", "root beer" ]
+    excludePatterns: [ "vinegar", "cooking", "rootbeer", "root beer" ]
   },
   "Pet Supplies": {
-    match: [
+    includePatterns: [
       "cat", "dog", "pet", "cat food", "dog food", "* cat food", "* dog food", 
       "* pet food", "pet treats", "dog treats", "cat treats", "cat litter", "litter genie"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Household Goods": {
-    match: [
+    includePatterns: [
       "toilet paper", "paper towels", "* cleaner", "laundry", "paper plates", "napkins", "drano"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Baby Supplies": {
-    match: [
+    includePatterns: [
       "diapers", "bibs", "wipes", "baby wipes", "baby *"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Personal Care": {
-    match: [
+    includePatterns: [
       "toothpaste", "shaving cream", "shaving *", "razors", "shampoo", "conditioner", "soap", 
       "toothbrush", "tooth brush", "tooth brushes",
       "hair *", "* hair", "bath *", "* bath", "lotion", "facial wash"
     ],
-    exclude: []
+    excludePatterns: []
   },
   "Other": {
-    match: [], 
-    exclude: [] 
+    includePatterns: [], 
+    excludePatterns: [] 
   }
 }

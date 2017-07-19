@@ -3,7 +3,10 @@ import { defaultCategories } from './defaultCategories'
 
 const masterTest = [
   { item: "banana", category: "Produce" },
-  { item: "steak", category: "Meat" }
+  { item: "steak", category: "Meat" },
+  { item: "poppyseed dressing", category: "Condiments/Dressings" },
+  { item: "fresh basil", category: "Produce" },
+  { item: "root beer", category: "Beverages" }
 ]
 
 it('categorizes all items correctly', () => {

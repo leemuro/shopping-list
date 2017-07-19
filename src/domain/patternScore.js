@@ -1,10 +1,10 @@
-export default function matchScore(match, candidate) {
+export default function patternScore(pattern, candidate) {
   if(candidate == null)
     return 0;
 
-  // Turn the matcher syntax into a regex: ex: "* apple" -> "(.*) apple"
-  let matchWords = match.split(" ");
-  let regexString = matchWords.reduce((result, word) => {
+  // Turn the pattern syntax into a regex: ex: "* apple" -> "(.*) apple"
+  let patternWords = pattern.split(" ");
+  let regexString = patternWords.reduce((result, word) => {
     if(word == "*")
       return result == "" ? "(.*)" : result + " (.*)"
     else
@@ -14,7 +14,7 @@ export default function matchScore(match, candidate) {
   let regex = new RegExp(regexString.toLowerCase() + '(\\W+|$)')
 
   if(candidate.toLowerCase().match(regex))
-    return matchWords.length;
+    return patternWords.length;
 
   return 0;
 }

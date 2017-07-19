@@ -1,38 +1,38 @@
-import matchScore from './matchScore'
+import patternScore from './patternScore'
 
-export default function categorizeItem(categoryDefinitions, categorizedItemIds, item, itemId) {
+export default function categorizeItem(categories, categorizedItemIds, item, itemId) {
   if(item == null) return categorizedItemIds
 
-  let categoryScores = Object.keys(categoryDefinitions).reduce((scores, cid) => {
-    let cd = categoryDefinitions[cid]
+  let categoryScores = Object.keys(categories).reduce((scores, cid) => {
+    let cd = categories[cid]
 
-    let excludeScore = cd.exclude.reduce((max, exclude) => {
-      let score = matchScore(exclude, item.description)
+    let excludeScore = cd.excludePatterns.reduce((max, pattern) => {
+      let score = patternScore(pattern, item.description)
       return score > max ? score : max;
     }, 0)
 
     scores[cid] = excludeScore > 0 
       ? 0 
-      : cd.match.reduce((max, matcher) => {
-          let score = matchScore(matcher, item.description)
+      : cd.includePatterns.reduce((max, pattern) => {
+          let score = patternScore(pattern, item.description)
           return score > max ? score : max;
         }, 0)
 
     return scores;
   }, {})
 
-  let maxMatcherScore = Object.keys(categoryScores).reduce((maxScore, cid) => {
+  let maxPatternScore = Object.keys(categoryScores).reduce((maxScore, cid) => {
     return categoryScores[cid] > maxScore ? categoryScores[cid] : maxScore;
   }, 0)
   
-  return Object.keys(categoryDefinitions).reduce((result, cid) => {
-    let cd = categoryDefinitions[cid]
-    let isFallthroughOtherCategory = cd.match.length == 0
-    let isMatch = isFallthroughOtherCategory 
-      ? maxMatcherScore == 0
-      : maxMatcherScore > 0 && categoryScores[cid] == maxMatcherScore
+  return Object.keys(categories).reduce((result, cid) => {
+    let cd = categories[cid]
+    let isFallthroughOtherCategory = cd.includePatterns.length == 0
+    let isIncluded = isFallthroughOtherCategory 
+      ? maxPatternScore == 0
+      : maxPatternScore > 0 && categoryScores[cid] == maxPatternScore
     let itemIds = categorizedItemIds[cid] === undefined ? [] : categorizedItemIds[cid]
-    result[cid] = isMatch ? [...itemIds, itemId] : itemIds
+    result[cid] = isIncluded ? [...itemIds, itemId] : itemIds
     return result
   }, {})
 }
